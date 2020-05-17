@@ -83,6 +83,12 @@ class Login extends React.Component {
                     Sign in
                   </button>
 
+                <div style={{"margin-top": "65px"}}>
+                  <Link to="/register">
+                  Forgot Password?
+                </Link>
+                </div>
+
                 </fieldset>
               </form>
             </div>
