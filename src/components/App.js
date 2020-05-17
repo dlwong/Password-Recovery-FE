@@ -11,6 +11,7 @@ import Login from '../components/Login';
 import Profile from '../components/Profile';
 import ProfileFavorites from '../components/ProfileFavorites';
 import Register from '../components/Register';
+import ForgotPassword from '../components/ForgotPassword';
 import Settings from '../components/Settings';
 import { store } from '../store';
 import { push } from 'react-router-redux';
@@ -59,6 +60,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home}/>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/forgotpassword" component={ForgotPassword} />
             <Route path="/editor/:slug" component={Editor} />
             <Route path="/editor" component={Editor} />
             <Route path="/article/:id" component={Article} />
