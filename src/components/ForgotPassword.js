@@ -4,8 +4,7 @@ import agent from '../agent';
 import { connect } from 'react-redux';
 import {
   UPDATE_FIELD_AUTH,
-  LOGIN,
-  LOGIN_PAGE_UNLOADED
+  FORGOT_PASSWORD
 } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({ ...state.auth });
@@ -14,9 +13,7 @@ const mapDispatchToProps = dispatch => ({
   onChangeEmail: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
   onSubmit: (email) =>
-    dispatch({ type: LOGIN, payload: agent.Auth.login(email) }),
-  onUnload: () =>
-    dispatch({ type: LOGIN_PAGE_UNLOADED })
+    dispatch({ type: FORGOT_PASSWORD, payload: agent.Auth.forgotPassword(email) })
 });
 
 class ForgotPassword extends React.Component {
@@ -31,7 +28,7 @@ class ForgotPassword extends React.Component {
     this.submitForm = (email) => ev => {
       ev.preventDefault();
       this.setState({clicked: true})
-      // this.props.onSubmit(email);
+      this.props.onSubmit(email);
     };
   }
   render() {
