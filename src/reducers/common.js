@@ -5,6 +5,7 @@ import {
   ARTICLE_SUBMITTED,
   SETTINGS_SAVED,
   LOGIN,
+  RESET_PASSWORD,
   REGISTER,
   DELETE_ARTICLE,
   ARTICLE_PAGE_UNLOADED,
@@ -55,6 +56,8 @@ export default (state = defaultState, action) => {
       };
     case DELETE_ARTICLE:
       return { ...state, redirectTo: '/' };
+    case RESET_PASSWORD:
+        return { ...state, redirectTo: '/' };
     case ARTICLE_PAGE_UNLOADED:
     case EDITOR_PAGE_UNLOADED:
     case HOME_PAGE_UNLOADED:
