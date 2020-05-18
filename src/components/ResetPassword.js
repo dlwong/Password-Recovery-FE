@@ -22,17 +22,18 @@ class ResetPassword extends React.Component {
     super();
 
     this.state = {
-            matchingPasswords: false
+              matchingPasswords: true
     }
     this.changeNewPassword = ev => this.props.onChangeNewPassword(ev.target.value);
     this.changeConfirmPassword = ev => this.props.onChangeConfirmPassword(ev.target.value);
     this.submitForm = (newPassword, confirmPassword) => ev => {
       ev.preventDefault();
       if (newPassword === confirmPassword) {
-        this.setState({matchingPasswords: false})
+        this.setState({matchingPasswords: true})
         this.props.onSubmit(confirmPassword);
+      }else {
+        this.setState({matchingPasswords: false})
       }
-      this.setState({matchingPasswords: true})
     };
   }
 
@@ -48,7 +49,7 @@ class ResetPassword extends React.Component {
               <h1 className="text-xs-center">Reset Password</h1>
               <p className="text-xs-center">
                 {
-                  this.state.matchingPasswords && 
+                  !this.state.matchingPasswords && 
                 <span style={{"color": "red"}}>Passwords do not match</span>
                 }
               </p>
