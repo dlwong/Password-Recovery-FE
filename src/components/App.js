@@ -62,7 +62,7 @@ class App extends React.Component {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/forgotpassword" component={ForgotPassword} />
-            <Route path="/resetpassword" component={ResetPassword} />
+            <Route path="/resetpassword/:token" component={ResetPassword} />
             <Route path="/editor/:slug" component={Editor} />
             <Route path="/editor" component={Editor} />
             <Route path="/article/:id" component={Article} />
