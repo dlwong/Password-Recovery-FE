@@ -1,44 +1,44 @@
-import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import {
   UPDATE_FIELD_AUTH,
-  LOGIN,
-  LOGIN_PAGE_UNLOADED
+  RESET_PASSWORD
 } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({ ...state.auth });
 
 const mapDispatchToProps = dispatch => ({
-  onChangeEmail: value =>
-    dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
-  onChangePassword: value =>
-    dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
-  onSubmit: (email, password) =>
-    dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
-  onUnload: () =>
-    dispatch({ type: LOGIN_PAGE_UNLOADED })
+  onChangeNewPassword: value =>
+    dispatch({ type: UPDATE_FIELD_AUTH, key: 'newPassword', value }),
+  onChangeConfirmPassword: value =>
+    dispatch({ type: UPDATE_FIELD_AUTH, key: 'confirmPassword', value }),
+  onSubmit: (password) =>
+    dispatch({ type: RESET_PASSWORD, payload: agent.Auth.verifyPassword(password) })
 });
 
 class ResetPassword extends React.Component {
   constructor() {
     super();
-    this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
-    this.changePassword = ev => this.props.onChangePassword(ev.target.value);
-    this.submitForm = (email, password) => ev => {
+
+    this.state = {
+            matchingPasswords: false
+    }
+    this.changeNewPassword = ev => this.props.onChangeNewPassword(ev.target.value);
+    this.changeConfirmPassword = ev => this.props.onChangeConfirmPassword(ev.target.value);
+    this.submitForm = (newPassword, confirmPassword) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(email, password);
+      if (newPassword === confirmPassword) {
+        this.setState({matchingPasswords: false})
+        this.props.onSubmit(confirmPassword);
+      }
+      this.setState({matchingPasswords: true})
     };
   }
 
-  componentWillUnmount() {
-    this.props.onUnload();
-  }
-
   render() {
-    const email = this.props.email;
-    const password = this.props.password;
+    const newPassword = this.props.newPassword;
+    const confirmPassword = this.props.confirmPassword;
     return (
       <div className="auth-page">
         <div className="container page">
@@ -47,20 +47,22 @@ class ResetPassword extends React.Component {
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Reset Password</h1>
               <p className="text-xs-center">
+                {
+                  this.state.matchingPasswords && 
+                <span style={{"color": "red"}}>Passwords do not match</span>
+                }
               </p>
 
-              <ListErrors errors={this.props.errors} />
-
-              <form onSubmit={this.submitForm(email, password)}>
+              <form onSubmit={this.submitForm(newPassword, confirmPassword)}>
                 <fieldset>
 
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
-                      type="email"
+                      type="password"
                       placeholder="New password"
-                      value={email}
-                      onChange={this.changeEmail} />
+                      value={newPassword}
+                      onChange={this.changeNewPassword} />
                   </fieldset>
 
                   <fieldset className="form-group">
@@ -68,8 +70,8 @@ class ResetPassword extends React.Component {
                       className="form-control form-control-lg"
                       type="password"
                       placeholder="Confirm Password"
-                      value={password}
-                      onChange={this.changePassword} />
+                      value={confirmPassword}
+                      onChange={this.changeConfirmPassword} />
                   </fieldset>
 
                   <button
