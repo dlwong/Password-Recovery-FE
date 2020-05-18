@@ -1,5 +1,7 @@
 import {
   LOGIN,
+  FORGOT_PASSWORD,
+  RESET_PASSWORD,
   REGISTER,
   LOGIN_PAGE_UNLOADED,
   REGISTER_PAGE_UNLOADED,
@@ -26,6 +28,10 @@ export default (state = {}, action) => {
       break;
     case UPDATE_FIELD_AUTH:
       return { ...state, [action.key]: action.value };
+    case FORGOT_PASSWORD:
+      return {};
+    case RESET_PASSWORD:
+      return {};
     default:
       return state;
   }
