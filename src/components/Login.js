@@ -83,7 +83,7 @@ class Login extends React.Component {
                     Sign in
                   </button>
 
-                <div style={{"margin-top": "65px"}}>
+                <div style={{"marginTop": "65px"}}>
                   <Link to="/forgotpassword">
                   Forgot Password?
                 </Link>
