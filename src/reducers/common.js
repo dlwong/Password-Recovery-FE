@@ -57,7 +57,7 @@ export default (state = defaultState, action) => {
     case DELETE_ARTICLE:
       return { ...state, redirectTo: '/' };
     case RESET_PASSWORD:
-        return { ...state, redirectTo: '/' };
+        return { ...state, redirectTo: '/login' };
     case ARTICLE_PAGE_UNLOADED:
     case EDITOR_PAGE_UNLOADED:
     case HOME_PAGE_UNLOADED:
