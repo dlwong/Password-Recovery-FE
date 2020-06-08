@@ -38,8 +38,8 @@ const Auth = {
     requests.put('/user', { user }),
   forgotPassword: email =>
     requests.post('/forgot-password', { email }),
-  verifyPassword: (username, password) =>
-    requests.post('/verify-password', { username, password })
+  verifyPassword: (token, password) =>
+    requests.post('/verify-password', { token, password })
 };
 
 const Tags = {
