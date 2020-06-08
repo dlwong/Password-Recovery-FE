@@ -5,6 +5,7 @@ import {
   UPDATE_FIELD_AUTH,
   RESET_PASSWORD
 } from '../constants/actionTypes';
+import qs from 'qs';
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -31,7 +32,7 @@ class ResetPassword extends React.Component {
       ev.preventDefault();
       if (newPassword === confirmPassword) {
         this.setState({matchingPasswords: true})
-        this.props.onSubmit(this.props.match.params.token, confirmPassword);
+        this.props.onSubmit(qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).token, confirmPassword);
       }else {
         this.setState({matchingPasswords: false})
       }
