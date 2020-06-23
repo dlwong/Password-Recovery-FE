@@ -1,6 +1,6 @@
 # Implement Password Recovery on the Conduit Codebase
 
-I've left the template Conduit code alone so the general functionality still works (listed below). I've added the frontend to password recovery and connecting it to the backend to do the authentication.
+I've left the template [Conduit](https://github.com/gothinkster/realworld) code alone so the general functionality still works (listed below). I've added the frontend to password recovery and connecting it to the backend to do the authentication.
 
 
 ## Getting started
